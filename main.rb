@@ -12,18 +12,31 @@ def ceasar_cipher(string, value)
 
         # check if char is a lowercase letter
         if char =~ /[a-z]/i
-            ascii_value = char.ord
+            lowercase_ascii_value = char.ord
+            new_lowercase_ascii_value = lowercase_ascii_value + value
 
-            new_ascii_value = (ascii_value + value) % 26 + 'a'.ord
+            # check if new ascii value is greater than 'z'
+            if new_lowercase_ascii_value >= 'z'.ord
+                new_lowercase_ascii_value = new_lowercase_ascii_value - 'z'.ord + 'a'.ord
+                encoded_string << new_lowercase_ascii_value.chr
 
-            encoded_string << new_ascii_value.chr
+            else
+                encoded_string << new_lowercase_ascii_value.chr
+            end
 
         # check if char is an uppercase letter
         elsif char =~ /[A-Z]/i
-            ascii_value = char.ord
-            new_ascii_value = (ascii_value + value) % 26 + 'A'.ord
+            uppercase_ascii_value = char.ord
+            new_uppercase_ascii_value = uppercase_ascii_value + value
 
-            encoded_string << new_ascii_value.chr
+            # check if new ascii value is greater than 'z'
+            if new_uppercase_ascii_value >= 'Z'.ord
+                new_uppercase_ascii_value = new_uppercase_ascii_value - 'Z'.ord + 'A'.ord
+                encoded_string << new_uppercase_ascii_value.chr
+
+            else
+                encoded_string << new_uppercase_ascii_value.chr
+            end
 
         # if char is not a letter, just add it to the encoded string
         else
